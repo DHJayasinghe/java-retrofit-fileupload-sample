@@ -10,43 +10,47 @@ package javaretrofit.net;
  * @author USER
  */
 public class GlobalResponse {
-      public String result;
+    public int success;
 
-    public String getResult() {
-        return result;
-    }
+    public int failed;
 
-    public void setResult(String result) {
-        this.result = result;
-    }
+    // public String[] uploadedFiles;
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
+    // public String getResult() {
+    //     return result;
+    // }
 
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
+    // public void setResult(String result) {
+    //     this.result = result;
+    // }
 
-    public String getTimeGenerated() {
-        return timeGenerated;
-    }
+    // public String getErrorMessage() {
+    //     return errorMessage;
+    // }
 
-    public void setTimeGenerated(String timeGenerated) {
-        this.timeGenerated = timeGenerated;
-    }
+    // public void setErrorMessage(String errorMessage) {
+    //     this.errorMessage = errorMessage;
+    // }
 
-    public String errorMessage;
-    public String timeGenerated;
+    // public String getTimeGenerated() {
+    //     return timeGenerated;
+    // }
 
-    public String getSuccess() {
-        return success;
-    }
+    // public void setTimeGenerated(String timeGenerated) {
+    //     this.timeGenerated = timeGenerated;
+    // }
 
-    public void setSuccess(String success) {
-        this.success = success;
-    }
+    // public String errorMessage;
+    // public String timeGenerated;
 
-    public String success;  
-    
+    // public String getSuccess() {
+    //     return success;
+    // }
+
+    // public void setSuccess(String success) {
+    //     this.success = success;
+    // }
+
+    // public String success;
+
 }

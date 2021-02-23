@@ -14,28 +14,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * @author Ezequiel
  */
 public class RetrofitClient {
-
     private static Retrofit retrofit;
     private static final String BASE_URL = "http://192.168.8.104:81/api/fileupload/";
 
-
     private static Retrofit getClient(String baseUrl) {
         if (retrofit == null) {
-            
-        // Asociamos el interceptor a las peticiones
-        OkHttpClient httpClient = new OkHttpClient
-                .Builder()
-                .build();
+            final OkHttpClient client = new OkHttpClient.Builder().build();
 
-            final OkHttpClient client = new OkHttpClient
-                    .Builder()
-                    .build();
-
-            retrofit = new Retrofit.Builder()
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl(baseUrl)
-                    .client(client)
-                    .build();
+            retrofit = new Retrofit.Builder().addConverterFactory(GsonConverterFactory.create()).baseUrl(baseUrl)
+                    .client(client).build();
         }
         return retrofit;
     }
@@ -43,6 +30,4 @@ public class RetrofitClient {
     public static Services getAPIService() {
         return RetrofitClient.getClient(BASE_URL).create(Services.class);
     }
-
 }
-

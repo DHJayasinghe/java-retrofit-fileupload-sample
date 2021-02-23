@@ -5,9 +5,13 @@
  */
 package javaretrofit.net;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import javaretrofit.net.models.LoginResponses;
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -23,11 +27,13 @@ public interface Services {
     @FormUrlEncoded
     @POST("signin")
     Call<LoginResponses> login(@Field("email") String email, @Field("password") String password);
-    
-    
+
     @Multipart
     @POST("using/model/simple")
-    Call<GlobalResponse> sendImageTest(@Part List<MultipartBody.Part> Somefile,@Part("Id") int id, @Part("Name") String name);
-    
-    
+    Call<GlobalResponse> sendSimpleModel(@Part MultipartBody.Part somefile, @Part("Id") int id,
+            @Part("Name") String name);
+
+    @Multipart
+    @POST("using/model/complex")
+    Call<GlobalResponse> sendComplexModel(@Part("Id") int id, @Part("Files") List<Map<String, RequestBody>> data);
 }
