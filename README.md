@@ -1,3 +1,4 @@
-# Java_Retrofit
+# Java Retrofit fileupload sample code for a reference repository
 
-Project created in NetBeans to consume a test api using retrofit
+### Reference repository
+[.NET Core API file uploads](https://github.com/DHJayasinghe/dotnetcoreapi-fileupload "Go to repo")
