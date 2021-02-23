@@ -6,7 +6,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient {
     private static Retrofit retrofit;
-    private static final String BASE_URL = "http://localhost:81/api/fileupload/";
+    private static final String BASE_URL = "http://localhost:5000/api/fileupload/";
 
     private RetrofitClient() {
     }
