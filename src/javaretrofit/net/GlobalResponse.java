@@ -17,38 +17,38 @@ public class GlobalResponse {
     // public String[] uploadedFiles;
 
     // public String getResult() {
-    //     return result;
+    // return result;
     // }
 
     // public void setResult(String result) {
-    //     this.result = result;
+    // this.result = result;
     // }
 
     // public String getErrorMessage() {
-    //     return errorMessage;
+    // return errorMessage;
     // }
 
     // public void setErrorMessage(String errorMessage) {
-    //     this.errorMessage = errorMessage;
+    // this.errorMessage = errorMessage;
     // }
 
     // public String getTimeGenerated() {
-    //     return timeGenerated;
+    // return timeGenerated;
     // }
 
     // public void setTimeGenerated(String timeGenerated) {
-    //     this.timeGenerated = timeGenerated;
+    // this.timeGenerated = timeGenerated;
     // }
 
     // public String errorMessage;
     // public String timeGenerated;
 
     // public String getSuccess() {
-    //     return success;
+    // return success;
     // }
 
     // public void setSuccess(String success) {
-    //     this.success = success;
+    // this.success = success;
     // }
 
     // public String success;

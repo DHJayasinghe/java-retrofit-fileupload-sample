@@ -5,7 +5,10 @@ public class Start {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JavaRetrofit aa = new JavaRetrofit();
-        aa.upload();
+        JavaRetrofit fileupload = new JavaRetrofit();
+        String filepath = "C:\\Users\\Dhanuka Jayasinghe\\Downloads\\shipment_registry_before.png";
+        // fileupload.uploadUsingSimpleModel(filepath);
+        fileupload.uploadUsingSimpleModel2(filepath);
+        // fileupload.uploadUsingComplexModel(filepath);
     }
 }

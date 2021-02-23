@@ -1,19 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package javaretrofit;
 
 import java.io.File;
 import java.net.URLConnection;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javaretrofit.net.RetrofitClient;
-import javaretrofit.net.Services;
+import javaretrofit.net.FileUploadService;
+import javaretrofit.net.UsingSimpleModelResponse;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -23,15 +17,13 @@ import retrofit2.Response;
 
 import javaretrofit.net.GlobalResponse;
 
-/**
- *
- * @author Ezequiel
- */
 public class JavaRetrofit {
+    private FileUploadService fileUploadApi;
     List<MultipartBody.Part> parts = new ArrayList<>();
 
-    File mCurrentPhotoPath = new File("C:\\Users\\Dhanuka Jayasinghe\\Downloads\\shipment_registry_before.png");
-    String path = "C:\\Users\\Dhanuka Jayasinghe\\Downloads\\shipment_registry_before.png";
+    public JavaRetrofit() {
+        fileUploadApi = RetrofitClient.getAPIService();
+    }
 
     private MultipartBody.Part prepareFilePart(String partName, String fileUri) {
         File file = new File(fileUri);
@@ -48,28 +40,22 @@ public class JavaRetrofit {
         return RequestBody.create(MediaType.parse(mimeType), file);
     }
 
-    public void addtoArray() {
-        parts.add(prepareFilePart("photo", mCurrentPhotoPath.getAbsolutePath()));
-    }
+    public void uploadUsingComplexModel(String filePath) {
+        RequestBody id = RequestBody.create(okhttp3.MultipartBody.FORM, "1");
+        ArrayList<MultipartBody.Part> parts = new ArrayList<>()[1];
+        parts.add(prepareFilePart("Somefile", filePath));
 
-    public void upload() {
-        Services api = RetrofitClient.getAPIService();
+        // Map<String, RequestBody> map = new HashMap<>();
+        // map.put("Somefile", prepareFile(filePath));
+        // map.put("Id", RequestBody.create(MediaType.parse("multipart/form-data"), "1"));
+        // map.put("Name", RequestBody.create(MediaType.parse("multipart/form-data"), "Jane Doe"));
 
-        // MultipartBody.Part filepart = prepareFilePart("Somefile", mCurrentPhotoPath.getAbsolutePath());
+        // myMap.add(0, map);
 
-        List<Map<String, RequestBody>> myMap = new ArrayList<Map<String, RequestBody>>();
-
-        Map<String, RequestBody> map = new HashMap<>();
-        map.put("Somefile", prepareFile(mCurrentPhotoPath.getAbsolutePath()));
-        map.put("Id", RequestBody.create(MediaType.parse("multipart/form-data"), "1"));
-        map.put("Name", RequestBody.create(MediaType.parse("multipart/form-data"), "Jane Doe"));
-
-        myMap.add(0, map);
-
-        api.sendComplexModel(1, myMap).enqueue(new Callback<GlobalResponse>() {
+        fileUploadApi.sendComplexModel(id, parts).enqueue(new Callback<GlobalResponse>() {
             @Override
             public void onResponse(Call<GlobalResponse> call, Response<GlobalResponse> rspns) {
-                GlobalResponse r = rspns.body();
+                GlobalResponse res = rspns.body();
                 System.out.println("Success");
                 // throw new UnsupportedOperationException("Not supported yet."); // To change
                 // body of generated methods,
@@ -78,12 +64,49 @@ public class JavaRetrofit {
 
             @Override
             public void onFailure(Call<GlobalResponse> call, Throwable thrwbl) {
-
-                throw new UnsupportedOperationException("Not supported yet."); // To change body of generated methods,
-                                                                               // choose Tools | Templates.
+                System.out.println("Error on uploading");
             }
         });
 
     }
 
+    public void uploadUsingSimpleModel(String filePath) {
+        RequestBody someFile = prepareFile(filePath);
+        RequestBody id = RequestBody.create(okhttp3.MultipartBody.FORM, "1");
+        RequestBody name = RequestBody.create(okhttp3.MultipartBody.FORM, "Dhanuka");
+
+        fileUploadApi.sendSimpleModel(someFile, id, name).enqueue(new Callback<UsingSimpleModelResponse>() {
+            @Override
+            public void onResponse(Call<UsingSimpleModelResponse> call, Response<UsingSimpleModelResponse> response) {
+                UsingSimpleModelResponse result = response.body();
+                System.out.println("Upload complete");
+                System.out.println(result.filename);
+            }
+
+            @Override
+            public void onFailure(Call<UsingSimpleModelResponse> call, Throwable thrwbl) {
+                System.out.println("Error on uploading");
+            }
+        });
+    }
+
+    public void uploadUsingSimpleModel2(String filePath) {
+        MultipartBody.Part filepart = prepareFilePart("Somefile", filePath);
+        RequestBody id = RequestBody.create(okhttp3.MultipartBody.FORM, "1");
+        RequestBody name = RequestBody.create(okhttp3.MultipartBody.FORM, "Dhanuka");
+
+        fileUploadApi.sendSimpleModel(filepart, id, name).enqueue(new Callback<UsingSimpleModelResponse>() {
+            @Override
+            public void onResponse(Call<UsingSimpleModelResponse> call, Response<UsingSimpleModelResponse> response) {
+                UsingSimpleModelResponse result = response.body();
+                System.out.println("Upload complete");
+                System.out.println(result.filename);
+            }
+
+            @Override
+            public void onFailure(Call<UsingSimpleModelResponse> call, Throwable thrwbl) {
+                System.out.println("Error on uploading");
+            }
+        });
+    }
 }
